@@ -1,0 +1,33 @@
+name: Google Cloud Authentication and Deployment
+
+on:
+  push:
+    branches:
+      - main  # or the branch you want to deploy from
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Google Cloud credentials
+      run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $HOME/google-credentials.json
+
+    - name: Authenticate Google Cloud
+      run: |
+        export GOOGLE_APPLICATION_CREDENTIALS=$HOME/google-credentials.json
+        gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: $HOME/google-credentials.json
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Streamlit app
+      run: |
+        streamlit run streamlit/phrase3_pipeline.py
