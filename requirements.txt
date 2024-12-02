@@ -3,3 +3,4 @@ pandas
 google-cloud-bigquery
 vertexai
 numpy
+pandas-gbq

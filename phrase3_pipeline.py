@@ -24,6 +24,7 @@ In this class, we will explore:
 
 # imports
 import pandas as pd
+from pandas import read_gbq
 import numpy as np
 import json
 import os
@@ -53,19 +54,22 @@ credentials_base64 = st.secrets["google_credential"]
 credentials_json = base64.b64decode(credentials_base64).decode("utf-8")
 
 # Write the decoded credentials to a temporary file
-with open("/tmp/google-credentials.json", "w") as f:
+with open("/tmp/google_credential.json", "w") as f:
     f.write(credentials_json)
 
-st.title('CDC Database Text to SQL Tool')
+# Authenticate with Google Cloud using the credentials file
+bq_client = bigquery.Client.from_service_account_json("/tmp/google_credential.json")
+
 
 # setup your project
-project_id = "ba882-group-10" # my project is btibert-ba882-fall24
-region_id = "us-central1" # my region is us-central1
-
+# project_id = "ba882-group-10" # my project is btibert-ba882-fall24
+# region_id = "us-central1" # my region is us-central1
 
 # this uses google secret key here in Colab
 # you will need to retrieve this from Pinecone to follow along
-bq_client = bigquery.Client(project = project_id)
+# bq_client = bigquery.Client(project = project_id)
+
+st.title('CDC Database Text to SQL Tool')
 
 join_logic = """
 SELECT *
