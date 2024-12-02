@@ -14,9 +14,13 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - name: Envs Before
-        run: echo "Env values before"
-
+      - name: Set up Google Cloud SDK
+        run: |
+          echo "Setting up Google Cloud SDK"
+          curl https://sdk.cloud.google.com | bash
+          source $HOME/google-cloud-sdk/path.bash.inc
+          gcloud components update
+          
       - name: Decode and Authenticate with Google Cloud
         run: |
           # Decode the base64-encoded secret and save it to a JSON file
@@ -24,6 +28,7 @@ jobs:
           
           # Authenticate with Google Cloud using the decoded JSON credentials
           gcloud auth activate-service-account --key-file=$HOME/google-credentials.json
+          gcloud config set project ba882-group-10  # Set your project if needed
 
   deploy:
     name: Deploy to Streamlit Cloud
@@ -45,6 +50,5 @@ jobs:
 
       - name: Deploy to Streamlit Cloud
         run: |
-          # If you're using Streamlit Cloud, this step may not be necessary.
-          # Streamlit Cloud auto-deploys from GitHub, but you can trigger deployment via API or script here if needed.
+          # Streamlit auto-deploys when you push to GitHub, this is a placeholder.
           echo "Your app is deployed to Streamlit Cloud automatically with GitHub push to the main branch."
