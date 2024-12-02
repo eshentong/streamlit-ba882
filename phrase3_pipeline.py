@@ -45,9 +45,6 @@ from vertexai.generative_models import (
 import base64
 import json
 import os
-import streamlit as st
-from google.cloud import bigquery
-import base64
 
 # Retrieve the base64-encoded credentials from Streamlit secrets
 credentials_base64 = st.secrets["google_credential"]
