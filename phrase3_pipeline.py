@@ -26,6 +26,7 @@ In this class, we will explore:
 import pandas as pd
 import numpy as np
 import json
+import os
 
 import streamlit as st
 from google.cloud import bigquery
@@ -40,6 +41,23 @@ from vertexai.generative_models import (
     Tool,
     ToolConfig
 )
+
+import base64
+import json
+import os
+import streamlit as st
+from google.cloud import bigquery
+import base64
+
+# Retrieve the base64-encoded credentials from Streamlit secrets
+credentials_base64 = st.secrets["google_credential"]
+
+# Decode the base64 string
+credentials_json = base64.b64decode(credentials_base64).decode("utf-8")
+
+# Write the decoded credentials to a temporary file
+with open("/tmp/google-credentials.json", "w") as f:
+    f.write(credentials_json)
 
 st.title('CDC Database Text to SQL Tool')
 
