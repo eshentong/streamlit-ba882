@@ -37,6 +37,10 @@ generation_config = GenerationConfig(temperature=0)
 
 # Streamlit UI setup
 st.title('CDC Database Text to SQL Tool')
+img_erd='https://raw.githubusercontent.com/eshentong/streamlit-cdc/main/project_erd.png'
+# st.image(img_erd, caption="CDC Database ERD", use_column_width=True)
+with st.sidebar:
+    st.image(img_erd, caption="Sidebar CDC Database ERD")
 
 join_logic = """
 SELECT *
