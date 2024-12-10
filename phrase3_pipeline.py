@@ -140,7 +140,7 @@ Return a valid JSON with a key SQL. The value of the SQL key should be the query
 
 Rely on schemas as your source of truth, only use the table names and columns mentioned in {schema_records}. (must follow this rule)
 Use CAST where necessary. Ensure functions are compatible with BigQuery.
-For questions regarding the past week, include any dates within the past seven days. 
+For questions regarding the past week, include any dates within the past seven days; for the quests regarding future, query for date > current date. 
 Disease records mean the same as disease occurrences.
 For disease names, return the actual name of the disease (disease_label)
 Make the default prompt this: How many occurrances are there for each disease? show both the disease name and disease code.
