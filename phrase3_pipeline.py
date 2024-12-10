@@ -155,9 +155,6 @@ Make the default prompt this: How many occurrances are there for each disease? s
 ### Mega Table Context
 {df}
 
-###machine learning tables description
-{ml_table_description}
-
 ### User prompt
 {user}
 
